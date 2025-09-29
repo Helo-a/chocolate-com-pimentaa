@@ -1,1 +1,415 @@
 tralalala
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub Criativo - Música, Livros e Conteúdo</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            margin: 10px 0 0 0;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .video-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            border-color: #667eea;
+            background: #fff;
+            transform: scale(1.02);
+        }
+
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .video-description {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .play-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .amazon-section {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+            color: white;
+        }
+
+        .amazon-section .section-title {
+            color: white;
+        }
+
+        .book-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .book-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #ff6b35;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Hub Criativo</h1>
+            <p>Sua central de música, livros e conteúdo inspirador</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <span class="icon">🎵</span>
+                Playlist Musical
+            </h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('yQFImndjBBw')">
+                    <div class="video-title">Música Principal</div>
+                    <div class="video-description">Uma seleção especial para começar sua jornada musical</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+                
+                <div class="video-card" onclick="openVideo('04VkZNIy298')">
+                    <div class="video-title">Segunda Faixa</div>
+                    <div class="video-description">Continue a experiência com este som incrível</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+                
+                <div class="video-card" onclick="openVideo('ZWvU8JuFxwA')">
+                    <div class="video-title">Mix Especial</div>
+                    <div class="video-description">Uma mistura perfeita para qualquer momento</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+                
+                <div class="video-card" onclick="openVideo('-YmhWG1UtW4')">
+                    <div class="video-title">Ritmo Envolvente</div>
+                    <div class="video-description">Deixe-se levar por essa batida contagiante</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+                
+                <div class="video-card" onclick="openVideo('0WKHu0bNXDY')">
+                    <div class="video-title">Melodia Relaxante</div>
+                    <div class="video-description">Para momentos de tranquilidade e reflexão</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+                
+                <div class="video-card" onclick="openVideo('ZU4Y2q9xK1I')">
+                    <div class="video-title">Energia Pura</div>
+                    <div class="video-description">Para quando você precisa de motivação extra</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+                
+                <div class="video-card" onclick="openVideo('HZ3315NPUI0')">
+                    <div class="video-title">Conteúdo Especial</div>
+                    <div class="video-description">Uma experiência única e envolvente</div>
+                    <button class="play-button">▶️ Reproduzir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section amazon-section">
+            <h2 class="section-title">
+                <span class="icon">📚</span>
+                Biblioteca Amazon
+            </h2>
+            <div class="book-showcase">
+                <div class="book-card">
+                    <div class="book-icon">📖</div>
+                    <h3>Livros Digitais</h3>
+                    <p>Explore uma vasta coleção de e-books e audiolivros</p>
+                    <button class="cta-button" onclick="openAmazon()">Explorar Livros</button>
+                </div>
+                
+                <div class="book-card">
+                    <div class="book-icon">🎧</div>
+                    <h3>Audiolivros</h3>
+                    <p>Escute suas histórias favoritas em qualquer lugar</p>
+                    <button class="cta-button" onclick="openAmazon()">Ouvir Agora</button>
+                </div>
+                
+                <div class="book-card">
+                    <div class="book-icon">📱</div>
+                    <h3>Kindle Unlimited</h3>
+                    <p>Acesso ilimitado a milhares de títulos</p>
+                    <button class="cta-button" onclick="openAmazon()">Assinar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <span class="icon">🎯</span>
+                Ações Rápidas
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <button class="play-button" onclick="playRandomVideo()" style="padding: 15px;">
+                    🎲 Música Aleatória
+                </button>
+                <button class="play-button" onclick="openAmazon()" style="padding: 15px;">
+                    📚 Ir para Amazon
+                </button>
+                <button class="play-button" onclick="showPlaylist()" style="padding: 15px;">
+                    📋 Ver Playlist Completa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Reproduzindo Música</h3>
+            <p id="modalMessage">Abrindo o vídeo em uma nova aba...</p>
+            <button class="cta-button" onclick="closeModal()" style="margin-top: 20px;">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        const videos = [
+            { id: 'yQFImndjBBw', title: 'Música Principal' },
+            { id: '04VkZNIy298', title: 'Segunda Faixa' },
+            { id: 'ZWvU8JuFxwA', title: 'Mix Especial' },
+            { id: '-YmhWG1UtW4', title: 'Ritmo Envolvente' },
+            { id: '0WKHu0bNXDY', title: 'Melodia Relaxante' },
+            { id: 'ZU4Y2q9xK1I', title: 'Energia Pura' },
+            { id: 'HZ3315NPUI0', title: 'Conteúdo Especial' }
+        ];
+
+        function openVideo(videoId) {
+            const video = videos.find(v => v.id === videoId);
+            document.getElementById('modalMessage').textContent = 
+                `Abrindo "${video.title}" no YouTube...`;
+            document.getElementById('videoModal').style.display = 'flex';
+            
+            setTimeout(() => {
+                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank', 'noopener,noreferrer');
+                closeModal();
+            }, 1500);
+        }
+
+        function openAmazon() {
+            document.getElementById('modalMessage').textContent = 
+                'Redirecionando para a Amazon Brasil...';
+            document.getElementById('videoModal').style.display = 'flex';
+            
+            setTimeout(() => {
+                window.open('https://www.amazon.com.br/b?ie=UTF8&node=7872687011', '_blank', 'noopener,noreferrer');
+                closeModal();
+            }, 1500);
+        }
+
+        function playRandomVideo() {
+            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+            openVideo(randomVideo.id);
+        }
+
+        function showPlaylist() {
+            let playlistText = 'Playlist Completa:\n\n';
+            videos.forEach((video, index) => {
+                playlistText += `${index + 1}. ${video.title}\n`;
+            });
+            
+            document.getElementById('modalMessage').innerHTML = 
+                playlistText.replace(/\n/g, '<br>');
+            document.getElementById('videoModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('videoModal').style.display = 'none';
+        }
+
+        // Fechar modal clicando fora dele
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Adicionar efeitos de hover dinâmicos
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.video-card, .book-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02) translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) translateY(0)';
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986c8f1a2341e16e',t:'MTc1OTE2MDIxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
